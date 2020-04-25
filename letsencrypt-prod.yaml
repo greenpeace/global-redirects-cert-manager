@@ -3,9 +3,9 @@
 # kubectl create -f LetsEncrypt-prod.yaml
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
-namespace: global-redirects
 metadata:
   name: letsencrypt-prod
+  namespace: global-redirects
 spec:
   acme:
     # The ACME server URL
