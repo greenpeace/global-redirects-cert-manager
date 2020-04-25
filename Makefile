@@ -54,9 +54,9 @@ endif
 	gcloud container clusters get-credentials $(PROD_PROJECT) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
 
 #Install the CustomResourceDefinition resources first separately
-		./create_crds.sh
+	./create_crds.sh
 
-  -kubectl label namespace $(NAMESPACE) certmanager.k8s.io/disable-validation=true
+	-kubectl label namespace $(NAMESPACE) certmanager.k8s.io/disable-validation=true
 	helm upgrade --install --force --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
@@ -64,8 +64,8 @@ endif
 		$(CHART_NAME)
 	$(MAKE) history
 
-#Check if exists or create ClusterIssuers
-	./create_clusterissuer.sh
+#Create Issuers
+	./create_issuer.sh
 
 destroy:
 	helm delete --purge $(RELEASE)
